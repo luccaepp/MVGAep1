@@ -1,3 +1,6 @@
+//Lucca Eppinger
+// nUSP: 11381406
+
 import java.util.Scanner;
 
 public class EP1 {

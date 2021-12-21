@@ -1,10 +1,8 @@
-// classe que representa uma matriz de valores do tipo double.
+//Lucca Eppinger
+// nUSP: 11381406
 
 class Matriz {
-    // constante para ser usada na comparacao de valores double.
-    // Se a diferenca absoluta entre dois valores double for menor
-    // do que o valor definido por esta constante, eles devem ser
-    // considerados iguais.
+
     public static final double SMALL = 0.000001;
     private int lin, col;
     private double [][] m;
@@ -41,10 +39,6 @@ class Matriz {
             System.out.println();
         }
     }
-    // metodo que imprime a matriz expandida formada pela combinacao da matriz que
-    // chama o metodo com a matriz "agregada" recebida como parametro. Ou seja, cada
-    // linha da matriz impressa possui as entradas da linha correspondente da matriz
-    // que chama o metodo, seguida das entradas da linha correspondente em "agregada".
 
     public void imprime(Matriz agregada){
         for(int i = 0; i < lin; i++){
@@ -58,14 +52,12 @@ class Matriz {
             System.out.println();
         }
     }
-    // metodo que troca as linhas i1 e i2 de lugar.
 
     private void trocaLinha(int i1, int i2){
         double[] tmp = getM()[i1];
         getM()[i1] = getM()[i2];
         getM()[i2] = tmp;
     }
-    // metodo que multiplica as entradas da linha i pelo escalar k
 
     private void multiplicaLinha(int i, double k){
         for (int j = 0; j < col; j++) {
@@ -85,12 +77,6 @@ class Matriz {
         }
     }
 
-    // metodo que procura, a partir da linha ini, a linha com uma entrada nao nula que
-    // esteja o mais a esquerda possivel dentre todas as linhas. Os indices da linha e da
-    // coluna referentes a entrada nao nula encontrada sao devolvidos como retorno do metodo.
-    // Este metodo ja esta pronto para voces usarem na implementacao da eliminacao gaussiana
-    // e eleminacao de Gauss-Jordan.
-
     private int [] encontraLinhaPivo(int ini){
         int pivo_col, pivo_lin;
         pivo_lin = lin;
@@ -106,12 +92,6 @@ class Matriz {
         }
         return new int [] { pivo_lin, pivo_col };
     }
-
-    // metodo que implementa a eliminacao gaussiana, que coloca a matriz (que chama o metodo)
-    // na forma escalonada. As operacoes realizadas para colocar a matriz na forma escalonada
-    // tambem devem ser aplicadas na matriz "agregada" caso esta seja nao nula. Este metodo
-    // tambem deve calcular e devolver o determinante da matriz que invoca o metodo. Assumimos
-    // que a matriz que invoca este metodo eh uma matriz quadrada.
 
     public double formaEscalonada(Matriz agregada){
 
@@ -163,11 +143,6 @@ class Matriz {
         }
         return det;
     }
-    // metodo que implementa a eliminacao de Gauss-Jordan, que coloca a matriz (que chama o metodo)
-    // na forma escalonada reduzida. As operacoes realizadas para colocar a matriz na forma escalonada
-    // reduzida tambem devem ser aplicadas na matriz "agregada" caso esta seja nao nula. Assumimos que
-    // a matriz que invoca esta metodo eh uma matriz quadrada. Não se pode assumir, contudo, que esta
-    // matriz ja esteja na forma escalonada (mas voce pode usar o metodo acima para isso).
 
     public void formaEscalonadaReduzida(Matriz agregada){
         for (int linha = 0, pivo = 0; linha < lin && pivo < col; ++linha, ++pivo) {
@@ -187,8 +162,8 @@ class Matriz {
             }
             if (get(linha, pivo) != 0) {
                 double f = get(linha, pivo);
-                //divide na verdade
                 multiplicaLinha(linha, f);
+
                 if(agregada != null) {
                     agregada.multiplicaLinha(linha, f);
                 }
@@ -198,6 +173,7 @@ class Matriz {
                     continue;
                 double f = get(j, pivo);
                 combinaLinhas(j, linha, -f);
+
                 if(agregada != null) {
                     agregada.combinaLinhas(j, linha, -f);
                 }
